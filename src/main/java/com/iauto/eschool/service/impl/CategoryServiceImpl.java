@@ -28,13 +28,13 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public Category getById(long id) {
+	public Category getById(Long id) {
 		return categoryRepository.findById(id)
 					.orElseThrow(()-> new ResourceNotFoundException("category", id));
 	}
 
 	@Override
-	public Category update(long id, Category category) {
+	public Category update(Long id, Category category) {
 		getById(id);
 		category.setId(id);
 		return categoryRepository.save(category);
@@ -42,7 +42,7 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public void delete(long id) {
+	public void delete(Long id) {
 		getById(id);
 		categoryRepository.deleteById(id);
 	}

@@ -35,19 +35,19 @@ public class CategoryController {
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<?> getById(@PathVariable("id") long id) {
+	public ResponseEntity<?> getById(@PathVariable("id") Long id) {
 
 		return ResponseEntity.ok(CategoryMapper.INSTANCE.toCategoryDto( categoryService.getById(id) ));
 	}
 
 	@PutMapping("{id}")
-	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody CategoryDto categoryDto) {
+	public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody CategoryDto categoryDto) {
 		Category category = categoryService.update(id, CategoryMapper.INSTANCE.toCategory(categoryDto));
 		return ResponseEntity.ok(CategoryMapper.INSTANCE.toCategoryDto(category));
 	}
 
 	@DeleteMapping("{id}")
-	public ResponseEntity<?> delete(@PathVariable("id") long id) {
+	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
 		categoryService.delete(id);
 
 		return ResponseEntity.ok("{\"message\":\"successful\"}");
