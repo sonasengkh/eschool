@@ -9,13 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.Data;
 
 
 @Entity
 @Data
-@Table(name = "subscribes")
+@Table(name = "subscribes"
+		,uniqueConstraints = {@UniqueConstraint(columnNames = {"course_id","user_id"})}
+		)
 public class Subscribe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

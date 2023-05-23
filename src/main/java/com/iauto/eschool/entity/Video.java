@@ -24,6 +24,6 @@ public class Video {
 	private String image;
 	
 	@ManyToOne
-	@JoinColumn(name = "course_id")
+	@JoinColumn(name = "courseId")
 	private Course course;
 }
