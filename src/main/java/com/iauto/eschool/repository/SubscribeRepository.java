@@ -5,8 +5,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import com.iauto.eschool.entity.Subscribe;
+import com.iauto.eschool.entity.User;
 
 @Repository
 public interface SubscribeRepository extends JpaRepository<Subscribe, Long>, JpaSpecificationExecutor<Subscribe> {
-
+	
 }

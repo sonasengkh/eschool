@@ -4,4 +4,5 @@ import com.iauto.eschool.entity.User;
 
 public interface UserService {
 	User getById(Long id);
+	User getByUsername(String userName);
 }

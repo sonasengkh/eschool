@@ -9,6 +9,8 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.iauto.eschool.entity.Subscribe;
 
@@ -21,8 +23,17 @@ public class SubscribeSpec implements Specification<Subscribe> {
 	
 	List<Predicate> predicates = new ArrayList<>();
 	
+
+	
 	@Override
 	public Predicate toPredicate(Root<Subscribe> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+	
+
+		if(subscribeFilter.getUser().getId() != null) {
+			Predicate userId = root.get("user").get("id").in(subscribeFilter.getUser().getId());
+			predicates.add(userId);
+		}
+		
 		if (subscribeFilter.getId() != null) {
 			Predicate id = root.get("id").in(subscribeFilter.getId());
 			predicates.add(id);
@@ -31,6 +42,7 @@ public class SubscribeSpec implements Specification<Subscribe> {
 			Predicate status = root.get("status").in(subscribeFilter.getStatus());
 			predicates.add(status);
 		}
+		
 		
 		return criteriaBuilder.and(predicates.toArray(Predicate[]::new));
 	}

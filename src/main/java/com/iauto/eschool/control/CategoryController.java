@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,7 +55,10 @@ public class CategoryController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> getAll(@RequestParam Map<String, String> params){
+	public ResponseEntity<?> getAll(@RequestParam Map<String, String> params, Authentication authentication){
+		
+		System.out.println("my username: " + authentication.getName());
+		
 		Page<Category> categoryPage = categoryService.getAll(params);
 		PageDTO pageDTO = new PageDTO(categoryPage);
 		

@@ -5,10 +5,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.iauto.eschool.entity.Subscribe;
 import com.iauto.eschool.entity.SubscribeStatus;
+import com.iauto.eschool.entity.User;
 import com.iauto.eschool.exception.ResourceNotFoundException;
 import com.iauto.eschool.repository.SubscribeRepository;
 import com.iauto.eschool.service.CourseService;
@@ -17,8 +20,6 @@ import com.iauto.eschool.service.UserService;
 import com.iauto.eschool.service.util.PageUtil;
 import com.iauto.eschool.spec.SubscribeFilter;
 import com.iauto.eschool.spec.SubscribeSpec;
-
-import net.bytebuddy.implementation.bytecode.Throw;
 
 @Service
 public class SubscribeServiceImpl implements SubscribeService{
@@ -69,6 +70,16 @@ public class SubscribeServiceImpl implements SubscribeService{
 	public Page<Subscribe> getSubscribes(Map<String, String> params) {
 
 		SubscribeFilter subscribeFilter = new SubscribeFilter();
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		//System.out.println("myUserName:"+username);
+		User user = userService.getByUsername(username);
+		//System.out.println(user.getId());
+		if (user != null) {
+			subscribeFilter.setUser(user);
+		}
+		
 		
 		if (params.containsKey("id")) {
 			Long id = Long.parseLong( params.get("id") );
