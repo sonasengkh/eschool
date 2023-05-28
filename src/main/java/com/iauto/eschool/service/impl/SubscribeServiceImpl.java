@@ -51,6 +51,7 @@ public class SubscribeServiceImpl implements SubscribeService{
 	public Subscribe updateSubscribeStatus(Long id, String status) {
 		Subscribe subscribe = getSubscribe(id);
 		
+		
 		//convert String to subscribStatus Enum
 		SubscribeStatus subscribeStatus = null;
 		for (SubscribeStatus s : SubscribeStatus.values()) {
@@ -73,9 +74,10 @@ public class SubscribeServiceImpl implements SubscribeService{
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
-		//System.out.println("myUserName:"+username);
+		System.out.println("myUserName:"+username);
 		User user = userService.getByUsername(username);
-		//System.out.println(user.getId());
+		System.out.println(user.getId());
+		
 		if (user != null) {
 			subscribeFilter.setUser(user);
 		}

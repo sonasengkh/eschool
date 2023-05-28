@@ -45,4 +45,14 @@ public class User {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Role> roles;
+	
+	private boolean accountNonExpired;
+	private boolean accountNonLocked;
+	private boolean credentialsNonExpired;
+	private boolean enabled;
+	
+	private String firstName;
+	private String lastName;
+	
+	
 }

@@ -3,6 +3,9 @@ package com.iauto.eschool.config.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,6 +27,9 @@ import com.iauto.eschool.config.jwt.TokenVerifyFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
+	private UserDetailsService userDetailsService;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Override
@@ -44,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			;
 	}
 	
+	/*
 	@Bean
 	@Override
 	protected UserDetailsService userDetailsService() {
@@ -53,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			//.roles("ADMIN") //ROLE_ADMIN
 			.authorities(RoleEnum.ADMIN.getAuthorities())
 			.build();
-		
+			System.out.println(user1.getPassword());
 		
 		UserDetails user2 = User.builder()
 			.username("dollar")
@@ -61,10 +68,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			//.roles("AUTHOR")
 			.authorities(RoleEnum.AUTHOR.getAuthorities())
 			.build();
+			System.out.println(user2.getPassword());
 		
 		UserDetailsService userDetailsService = new InMemoryUserDetailsManager(user1,user2);
 		
 		return userDetailsService;
 	}
+	
+*/
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(getAuthenticationProvider());
+	}
+	
+	@Bean
+	public AuthenticationProvider getAuthenticationProvider() {
+		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+		authenticationProvider.setUserDetailsService(userDetailsService);
+		authenticationProvider.setPasswordEncoder(passwordEncoder);
+		return authenticationProvider;
+	}
+
 	
 }

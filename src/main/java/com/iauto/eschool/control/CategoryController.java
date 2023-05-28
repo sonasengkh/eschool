@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,8 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 
+	//@RolesAllowed("ROLE_ADMIN")
+	@PreAuthorize("hasAuthority('category:write')")
 	@PostMapping()
 	public ResponseEntity<?> create(@RequestBody CategoryDto categoryDto) {
 		Category category = categoryService.create(CategoryMapper.INSTANCE.toCategory(categoryDto));
