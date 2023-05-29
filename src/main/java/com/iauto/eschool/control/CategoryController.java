@@ -37,19 +37,22 @@ public class CategoryController {
 		Category category = categoryService.create(CategoryMapper.INSTANCE.toCategory(categoryDto));
 		return ResponseEntity.ok(CategoryMapper.INSTANCE.toCategoryDto(category));
 	}
-
+	
+	@PreAuthorize("hasAuthority('category:read')")
 	@GetMapping("{id}")
 	public ResponseEntity<?> getById(@PathVariable("id") Long id) {
 
 		return ResponseEntity.ok(CategoryMapper.INSTANCE.toCategoryDto( categoryService.getById(id) ));
 	}
 
+	@PreAuthorize("hasAuthority('category:update')")
 	@PutMapping("{id}")
 	public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody CategoryDto categoryDto) {
 		Category category = categoryService.update(id, CategoryMapper.INSTANCE.toCategory(categoryDto));
 		return ResponseEntity.ok(CategoryMapper.INSTANCE.toCategoryDto(category));
 	}
 
+	@PreAuthorize("hasAuthority('category:delete')")
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
 		categoryService.delete(id);
@@ -57,6 +60,7 @@ public class CategoryController {
 		return ResponseEntity.ok("{\"message\":\"successful\"}");
 	}
 	
+	@PreAuthorize("hasAuthority('category:read')")
 	@GetMapping
 	public ResponseEntity<?> getAll(@RequestParam Map<String, String> params, Authentication authentication){
 		
