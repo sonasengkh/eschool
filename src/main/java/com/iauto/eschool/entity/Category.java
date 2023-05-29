@@ -12,7 +12,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "categorys")
-public class Category {
+public class Category extends AuditEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
