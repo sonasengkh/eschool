@@ -13,7 +13,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name ="videos")
-public class Video {
+public class Video extends AuditEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

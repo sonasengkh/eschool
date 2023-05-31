@@ -16,7 +16,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "roles")
-public class Role {
+public class Role extends AuditEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

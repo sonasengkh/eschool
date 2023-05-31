@@ -19,7 +19,7 @@ import lombok.Data;
 @Table(name = "subscribes"
 		,uniqueConstraints = {@UniqueConstraint(columnNames = {"course_id","user_id"})}
 		)
-public class Subscribe {
+public class Subscribe extends AuditEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
