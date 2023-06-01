@@ -1,0 +1,67 @@
+databaseChangeLog:
+- changeSet:
+    id: 001_init_db_structure
+    author: sonaseng.kh@gmail.com
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: categorys_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: date_create
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: date_update
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: user_create
+            type: VARCHAR(255)
+        - column:
+            name: user_update
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(255)
+        tableName: categorys
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: courses_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: date_create
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: date_update
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: user_create
+            type: VARCHAR(255)
+        - column:
+            name: user_update
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(255)
+        - column:
+            name: category_id
+            type: BIGINT
+            constraints:
+              - foreignKeyName: fk_courses_categorys
+                references: categorys(id)
+        tableName: courses
