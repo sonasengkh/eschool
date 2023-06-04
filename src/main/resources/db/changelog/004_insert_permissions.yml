@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 002_insert_categorys
+    id: 004_insert_permissions
     author: sonaseng.kh@gmail.com
     changes:
     - loadData:
@@ -8,5 +8,5 @@ databaseChangeLog:
         - column:
             name: name
             type: VARCHAR(255)
-        tableName: categorys     
-        file: db/data/002_categorys.csv
+        tableName: permissions     
+        file: db/data/004_permissions.csv

@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 002_insert_categorys
+    id: 005_insert_roles
     author: sonaseng.kh@gmail.com
     changes:
     - loadData:
@@ -8,5 +8,7 @@ databaseChangeLog:
         - column:
             name: name
             type: VARCHAR(255)
-        tableName: categorys     
-        file: db/data/002_categorys.csv
+        tableName: roles     
+        file: db/data/005_roles.csv
+        
+   

@@ -1,3 +1,7 @@
-id,name,category_id
-1,Khmer Language Grade 1,1
-2,English Book 1,1
+name,category_id
+Khmer Language Grade 1,1
+Khmer Math Grade 1,1
+English Book 1,2
+Java Basic,3
+Java Advance,3
+Angular,3

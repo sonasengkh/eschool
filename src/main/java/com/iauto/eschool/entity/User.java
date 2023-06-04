@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.iauto.eschool.recyclebin.UserStatus;
+
 import lombok.Data;
 
 @Entity
@@ -37,8 +39,8 @@ public class User extends AuditEntity{
 	private Gender gender;
 	private String photo;
 	
-	@Enumerated(EnumType.STRING)
-	private UserStatus status;
+	//@Enumerated(EnumType.STRING)
+	//private UserStatus status;
 	
 	@Enumerated(EnumType.STRING)
 	private UserType type;
