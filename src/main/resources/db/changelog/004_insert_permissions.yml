@@ -1,0 +1,12 @@
+databaseChangeLog:
+- changeSet:
+    id: 004_insert_permissions
+    author: sonaseng.kh@gmail.com
+    changes:
+    - loadData:
+        columns:
+        - column:
+            name: name
+            type: VARCHAR(255)
+        tableName: permissions     
+        file: db/data/004_permissions.csv

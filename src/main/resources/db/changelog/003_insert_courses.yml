@@ -1,0 +1,15 @@
+databaseChangeLog:
+- changeSet:
+    id: 003_insert_courses
+    author: sonaseng.kh@gmail.com
+    changes:
+    - loadData:
+        columns:
+        - column:
+            name: name
+            type: VARCHAR(255)
+        - column:
+            name: category_id
+            type: NUMERIC
+        tableName: courses     
+        file: db/data/003_courses.csv

@@ -1,0 +1,12 @@
+databaseChangeLog:
+- changeSet:
+    id: 002_insert_categorys
+    author: sonaseng.kh@gmail.com
+    changes:
+    - loadData:
+        columns:
+        - column:
+            name: name
+            type: VARCHAR(255)
+        tableName: categorys     
+        file: db/data/002_categorys.csv

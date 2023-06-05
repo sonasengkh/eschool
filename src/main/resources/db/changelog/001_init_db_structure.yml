@@ -1,0 +1,312 @@
+databaseChangeLog:
+- changeSet:
+    id: 001_init_db_structure
+    author: sonaseng.kh@gmail.com
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: categorys_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: date_create
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: date_update
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: user_create
+            type: VARCHAR(255)
+        - column:
+            name: user_update
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(255)
+        tableName: categorys
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: courses_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: date_create
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: date_update
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: user_create
+            type: VARCHAR(255)
+        - column:
+            name: user_update
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(255)
+        - column:
+            name: category_id
+            type: BIGINT
+            constraints:
+              - foreignKeyName: fk_courses_categorys
+                references: categorys(id)
+        tableName: courses
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: permissions_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: date_create
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: date_update
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: user_create
+            type: VARCHAR(255)
+        - column:
+            name: user_update
+            type: VARCHAR(255)
+        - column:
+            name: name
+            type: VARCHAR(255)
+        tableName: permissions
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: roles_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: date_create
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: date_update
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: user_create
+            type: VARCHAR(255)
+        - column:
+            name: user_update
+            type: VARCHAR(255)
+        - column:
+            name: name
+            type: VARCHAR(255)
+        tableName: roles
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: roles_permissions_pkey
+            name: role_id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: roles_permissions_pkey
+            name: permissions_id
+            type: BIGINT
+        tableName: roles_permissions        
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: users_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: date_create
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: date_update
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: user_create
+            type: VARCHAR(255)
+        - column:
+            name: user_update
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: account_non_expired
+            type: BOOLEAN
+        - column:
+            constraints:
+              nullable: false
+            name: account_non_locked
+            type: BOOLEAN
+        - column:
+            constraints:
+              nullable: false
+            name: credentials_non_expired
+            type: BOOLEAN
+        - column:
+            name: dateofbirth
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: email
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: enabled
+            type: BOOLEAN
+        - column:
+            name: first_name
+            type: VARCHAR(255)
+        - column:
+            name: gender
+            type: VARCHAR(255)
+        - column:
+            name: last_name
+            type: VARCHAR(255)
+        - column:
+            name: password
+            type: VARCHAR(255)
+        - column:
+            name: phonenumber
+            type: VARCHAR(255)
+        - column:
+            name: photo
+            type: VARCHAR(255)
+        - column:
+            name: status
+            type: VARCHAR(255)
+        - column:
+            name: type
+            type: VARCHAR(255)
+        - column:
+            name: username
+            type: VARCHAR(255)
+        tableName: users
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: users_roles_pkey
+            name: user_id
+            type: BIGINT
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: users_roles_pkey
+            name: roles_id
+            type: BIGINT
+        tableName: users_roles   
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: subscribes_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: date_create
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: date_update
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: user_create
+            type: VARCHAR(255)
+        - column:
+            name: user_update
+            type: VARCHAR(255)
+        - column:
+            name: status
+            type: VARCHAR(255)
+        - column:
+            name: course_id
+            type: BIGINT  
+            constraints:
+              - foreignKeyName: fk_subscribes_courses
+                references: courses(id)                       
+        - column:
+            name: user_id
+            type: BIGINT
+            constraints:
+              - foreignKeyName: fk_subscribes_users
+                references: users(id)   
+        - addUniqueConstraint:  
+            columnNames:  course_id, user_id  
+            constraintName:  subscribe_user_course 
+            catalogName:  subscribe_user_course                          
+        tableName: subscribes       
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: videos_pkey
+            name: id
+            type: BIGINT
+        - column:
+            name: date_create
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: date_update
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            name: user_create
+            type: VARCHAR(255)
+        - column:
+            name: user_update
+            type: VARCHAR(255)
+        - column:
+            name: description
+            type: VARCHAR(255)
+        - column:
+            name: image
+            type: VARCHAR(255)
+        - column:
+            name: title
+            type: VARCHAR(255)
+        - column:
+            name: videolink
+            type: VARCHAR(255)
+        - column:
+            name: course_id
+            type: BIGINT
+            constraints:
+              - foreignKeyName: fk_videos_courses
+                references: courses(id)
+        tableName: videos                                      
