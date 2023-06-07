@@ -16,11 +16,14 @@ import com.iauto.eschool.service.util.PageUtil;
 import com.iauto.eschool.spec.CategoryFilter;
 import com.iauto.eschool.spec.CategorySpec;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService{
 
 	@Autowired
-	CategoryRepository categoryRepository;
+	private final CategoryRepository categoryRepository;
 	
 	@Override
 	public Category create(Category category) {
