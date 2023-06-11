@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	//https://stackoverflow.com/questions/37671125/how-to-configure-spring-security-to-allow-swagger-url-to-be-accessed-without-aut
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
@@ -40,7 +41,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
 			.authorizeHttpRequests()
-			.antMatchers("/index.html").permitAll()
+			.antMatchers("/index.html","/about-us/*",
+					"/v2/api-docs",
+                    "/configuration/ui",
+                    "/swagger-resources/**",
+                    "/configuration/security",
+                    "/swagger-ui.html",
+                    "/webjars/**",
+                    
+                    "/swagger-ui/*"
+					).permitAll()
 			//.antMatchers("*").hasRole("ADMIN")
 			//.antMatchers("/courses*","/courses/*").hasAnyRole("ADMIN","AUTHOR")
 			.anyRequest()
