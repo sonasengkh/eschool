@@ -11,4 +11,7 @@ public interface UserService {
 	
 	Optional<AuthUser> findAuthUserByUsername(String username);
 	
+	User register(User user);
+	
+	
 }

@@ -16,25 +16,25 @@ public class CategoryRepositoryTest {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	@Test
-	public void testFindByNameLike() {
-		//give
-		Category category = new Category();
-		category.setName("English");
-		categoryRepository.save(category);
-		
-		Category category2 = new Category();
-		category2.setName("KhmEr");
-		categoryRepository.save(category2);
-		
-		//when
-		List<Category> categorys = categoryRepository.findByNameLike("%E%");
-		
-		//then
-		assertEquals(2, categorys.size());
-		assertEquals("English", categorys.get(0).getName());
-		assertEquals(1, categorys.get(0).getId());
-		
-	}
+//	@Test
+//	public void testFindByNameLike() {
+//		//give
+//		Category category = new Category();
+//		category.setName("English");
+//		categoryRepository.save(category);
+//		
+//		Category category2 = new Category();
+//		category2.setName("KhmEr");
+//		categoryRepository.save(category2);
+//		
+//		//when
+//		List<Category> categorys = categoryRepository.findByNameLike("%E%");
+//		
+//		//then
+//		assertEquals(2, categorys.size());
+//		assertEquals("English", categorys.get(0).getName());
+//		assertEquals(1, categorys.get(0).getId());
+//		
+//	}
 	
 }

@@ -1,5 +1,6 @@
 package com.iauto.eschool.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -33,7 +34,9 @@ public class User extends AuditEntity{
 	private String password;
 	private String email;
 	private String phonenumber;
-	private LocalDateTime dateofbirth;
+	
+	//private LocalDateTime dateofbirth;
+	private LocalDate dateofbirth;
 	
 	@Enumerated(EnumType.STRING)
 	private Gender gender;

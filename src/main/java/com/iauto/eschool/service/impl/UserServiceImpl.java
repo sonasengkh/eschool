@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.iauto.eschool.config.security.AuthUser;
@@ -21,6 +22,9 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public User getById(Long id) {
@@ -69,6 +73,16 @@ public class UserServiceImpl implements UserService{
 	private Stream<SimpleGrantedAuthority> toStream(Role role){
 		return role.getPermissions().stream()
 			.map(permission -> new SimpleGrantedAuthority(permission.getName()));
+	}
+
+	@Override
+	public User register(User user) {
+		//Testing only
+		user.setPassword( passwordEncoder.encode(user.getPassword()) );
+		
+		user.setEnabled(false);
+		return userRepository.save(user);
+		
 	}
 
 	
