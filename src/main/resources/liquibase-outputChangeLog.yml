@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 1686387300167-1
+    id: 1686674669633-1
     author: sonahp (generated)
     changes:
     - createSequence:
@@ -13,7 +13,7 @@ databaseChangeLog:
         sequenceName: hibernate_sequence
         startValue: 1
 - changeSet:
-    id: 1686387300167-2
+    id: 1686674669633-2
     author: sonahp (generated)
     changes:
     - createTable:
@@ -45,7 +45,7 @@ databaseChangeLog:
             type: VARCHAR(255)
         tableName: categorys
 - changeSet:
-    id: 1686387300167-3
+    id: 1686674669633-3
     author: sonahp (generated)
     changes:
     - createTable:
@@ -80,7 +80,7 @@ databaseChangeLog:
             type: BIGINT
         tableName: courses
 - changeSet:
-    id: 1686387300167-4
+    id: 1686674669633-4
     author: sonahp (generated)
     changes:
     - createTable:
@@ -110,7 +110,7 @@ databaseChangeLog:
             type: VARCHAR(255)
         tableName: permissions
 - changeSet:
-    id: 1686387300167-5
+    id: 1686674669633-5
     author: sonahp (generated)
     changes:
     - createTable:
@@ -140,7 +140,7 @@ databaseChangeLog:
             type: VARCHAR(255)
         tableName: roles
 - changeSet:
-    id: 1686387300167-6
+    id: 1686674669633-6
     author: sonahp (generated)
     changes:
     - createTable:
@@ -161,7 +161,7 @@ databaseChangeLog:
             type: BIGINT
         tableName: roles_permissions
 - changeSet:
-    id: 1686387300167-7
+    id: 1686674669633-7
     author: sonahp (generated)
     changes:
     - createTable:
@@ -197,7 +197,7 @@ databaseChangeLog:
             type: BIGINT
         tableName: subscribes
 - changeSet:
-    id: 1686387300167-8
+    id: 1686674669633-8
     author: sonahp (generated)
     changes:
     - createTable:
@@ -272,9 +272,12 @@ databaseChangeLog:
         - column:
             name: username
             type: VARCHAR(255)
+        - column:
+            name: verification_code
+            type: VARCHAR(64)
         tableName: users
 - changeSet:
-    id: 1686387300167-9
+    id: 1686674669633-9
     author: sonahp (generated)
     changes:
     - createTable:
@@ -295,7 +298,7 @@ databaseChangeLog:
             type: BIGINT
         tableName: users_roles
 - changeSet:
-    id: 1686387300167-10
+    id: 1686674669633-10
     author: sonahp (generated)
     changes:
     - createTable:
@@ -337,7 +340,7 @@ databaseChangeLog:
             type: BIGINT
         tableName: videos
 - changeSet:
-    id: 1686387300167-11
+    id: 1686674669633-11
     author: sonahp (generated)
     changes:
     - addUniqueConstraint:
@@ -345,7 +348,7 @@ databaseChangeLog:
         constraintName: uk_fvlboe1rkmljqrviw6rm5sr3m
         tableName: categorys
 - changeSet:
-    id: 1686387300167-12
+    id: 1686674669633-12
     author: sonahp (generated)
     changes:
     - addUniqueConstraint:
@@ -353,7 +356,7 @@ databaseChangeLog:
         constraintName: uk_r43af9ap4edm43mmtq01oddj6
         tableName: users
 - changeSet:
-    id: 1686387300167-13
+    id: 1686674669633-13
     author: sonahp (generated)
     changes:
     - addUniqueConstraint:
@@ -361,7 +364,7 @@ databaseChangeLog:
         constraintName: ukcqr48ynu2tv1qxypqvtfcthm
         tableName: subscribes
 - changeSet:
-    id: 1686387300167-14
+    id: 1686674669633-14
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -376,7 +379,7 @@ databaseChangeLog:
         referencedTableName: users
         validate: true
 - changeSet:
-    id: 1686387300167-15
+    id: 1686674669633-15
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -391,7 +394,7 @@ databaseChangeLog:
         referencedTableName: permissions
         validate: true
 - changeSet:
-    id: 1686387300167-16
+    id: 1686674669633-16
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -406,7 +409,7 @@ databaseChangeLog:
         referencedTableName: categorys
         validate: true
 - changeSet:
-    id: 1686387300167-17
+    id: 1686674669633-17
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -421,7 +424,7 @@ databaseChangeLog:
         referencedTableName: users
         validate: true
 - changeSet:
-    id: 1686387300167-18
+    id: 1686674669633-18
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -436,7 +439,7 @@ databaseChangeLog:
         referencedTableName: roles
         validate: true
 - changeSet:
-    id: 1686387300167-19
+    id: 1686674669633-19
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -451,7 +454,7 @@ databaseChangeLog:
         referencedTableName: courses
         validate: true
 - changeSet:
-    id: 1686387300167-20
+    id: 1686674669633-20
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -466,490 +469,7 @@ databaseChangeLog:
         referencedTableName: roles
         validate: true
 - changeSet:
-    id: 1686387300167-21
-    author: sonahp (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: course_id
-        baseTableName: videos
-        constraintName: fkrccvc1a5qx2dqsyienwhuk66j
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: NO ACTION
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: courses
-        validate: true
-
-databaseChangeLog:
-- changeSet:
-    id: 1686387384042-1
-    author: sonahp (generated)
-    changes:
-    - createSequence:
-        cacheSize: 1
-        cycle: false
-        dataType: bigint
-        incrementBy: 1
-        maxValue: 9223372036854775807
-        minValue: 1
-        sequenceName: hibernate_sequence
-        startValue: 1
-- changeSet:
-    id: 1686387384042-2
-    author: sonahp (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: categorys_pkey
-            name: id
-            type: BIGINT
-        - column:
-            name: date_create
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: date_update
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: user_create
-            type: VARCHAR(255)
-        - column:
-            name: user_update
-            type: VARCHAR(255)
-        - column:
-            constraints:
-              nullable: false
-            name: name
-            type: VARCHAR(255)
-        tableName: categorys
-- changeSet:
-    id: 1686387384042-3
-    author: sonahp (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: courses_pkey
-            name: id
-            type: BIGINT
-        - column:
-            name: date_create
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: date_update
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: user_create
-            type: VARCHAR(255)
-        - column:
-            name: user_update
-            type: VARCHAR(255)
-        - column:
-            constraints:
-              nullable: false
-            name: name
-            type: VARCHAR(255)
-        - column:
-            name: category_id
-            type: BIGINT
-        tableName: courses
-- changeSet:
-    id: 1686387384042-4
-    author: sonahp (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: permissions_pkey
-            name: id
-            type: BIGINT
-        - column:
-            name: date_create
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: date_update
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: user_create
-            type: VARCHAR(255)
-        - column:
-            name: user_update
-            type: VARCHAR(255)
-        - column:
-            name: name
-            type: VARCHAR(255)
-        tableName: permissions
-- changeSet:
-    id: 1686387384042-5
-    author: sonahp (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: roles_pkey
-            name: id
-            type: BIGINT
-        - column:
-            name: date_create
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: date_update
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: user_create
-            type: VARCHAR(255)
-        - column:
-            name: user_update
-            type: VARCHAR(255)
-        - column:
-            name: name
-            type: VARCHAR(255)
-        tableName: roles
-- changeSet:
-    id: 1686387384042-6
-    author: sonahp (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: roles_permissions_pkey
-            name: role_id
-            type: BIGINT
-        - column:
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: roles_permissions_pkey
-            name: permissions_id
-            type: BIGINT
-        tableName: roles_permissions
-- changeSet:
-    id: 1686387384042-7
-    author: sonahp (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: subscribes_pkey
-            name: id
-            type: BIGINT
-        - column:
-            name: date_create
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: date_update
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: user_create
-            type: VARCHAR(255)
-        - column:
-            name: user_update
-            type: VARCHAR(255)
-        - column:
-            name: status
-            type: VARCHAR(255)
-        - column:
-            name: course_id
-            type: BIGINT
-        - column:
-            name: user_id
-            type: BIGINT
-        tableName: subscribes
-- changeSet:
-    id: 1686387384042-8
-    author: sonahp (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: users_pkey
-            name: id
-            type: BIGINT
-        - column:
-            name: date_create
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: date_update
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: user_create
-            type: VARCHAR(255)
-        - column:
-            name: user_update
-            type: VARCHAR(255)
-        - column:
-            constraints:
-              nullable: false
-            name: account_non_expired
-            type: BOOLEAN
-        - column:
-            constraints:
-              nullable: false
-            name: account_non_locked
-            type: BOOLEAN
-        - column:
-            constraints:
-              nullable: false
-            name: credentials_non_expired
-            type: BOOLEAN
-        - column:
-            name: dateofbirth
-            type: date
-        - column:
-            name: email
-            type: VARCHAR(255)
-        - column:
-            constraints:
-              nullable: false
-            name: enabled
-            type: BOOLEAN
-        - column:
-            name: first_name
-            type: VARCHAR(255)
-        - column:
-            name: gender
-            type: VARCHAR(255)
-        - column:
-            name: last_name
-            type: VARCHAR(255)
-        - column:
-            name: password
-            type: VARCHAR(255)
-        - column:
-            name: phonenumber
-            type: VARCHAR(255)
-        - column:
-            name: photo
-            type: VARCHAR(255)
-        - column:
-            name: type
-            type: VARCHAR(255)
-        - column:
-            name: username
-            type: VARCHAR(255)
-        tableName: users
-- changeSet:
-    id: 1686387384042-9
-    author: sonahp (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: users_roles_pkey
-            name: user_id
-            type: BIGINT
-        - column:
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: users_roles_pkey
-            name: roles_id
-            type: BIGINT
-        tableName: users_roles
-- changeSet:
-    id: 1686387384042-10
-    author: sonahp (generated)
-    changes:
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              nullable: false
-              primaryKey: true
-              primaryKeyName: videos_pkey
-            name: id
-            type: BIGINT
-        - column:
-            name: date_create
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: date_update
-            type: TIMESTAMP WITHOUT TIME ZONE
-        - column:
-            name: user_create
-            type: VARCHAR(255)
-        - column:
-            name: user_update
-            type: VARCHAR(255)
-        - column:
-            name: description
-            type: VARCHAR(255)
-        - column:
-            name: image
-            type: VARCHAR(255)
-        - column:
-            name: title
-            type: VARCHAR(255)
-        - column:
-            name: videolink
-            type: VARCHAR(255)
-        - column:
-            name: course_id
-            type: BIGINT
-        tableName: videos
-- changeSet:
-    id: 1686387384042-11
-    author: sonahp (generated)
-    changes:
-    - addUniqueConstraint:
-        columnNames: name
-        constraintName: uk_fvlboe1rkmljqrviw6rm5sr3m
-        tableName: categorys
-- changeSet:
-    id: 1686387384042-12
-    author: sonahp (generated)
-    changes:
-    - addUniqueConstraint:
-        columnNames: username
-        constraintName: uk_r43af9ap4edm43mmtq01oddj6
-        tableName: users
-- changeSet:
-    id: 1686387384042-13
-    author: sonahp (generated)
-    changes:
-    - addUniqueConstraint:
-        columnNames: course_id, user_id
-        constraintName: ukcqr48ynu2tv1qxypqvtfcthm
-        tableName: subscribes
-- changeSet:
-    id: 1686387384042-14
-    author: sonahp (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: user_id
-        baseTableName: users_roles
-        constraintName: fk2o0jvgh89lemvvo17cbqvdxaa
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: NO ACTION
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: users
-        validate: true
-- changeSet:
-    id: 1686387384042-15
-    author: sonahp (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: permissions_id
-        baseTableName: roles_permissions
-        constraintName: fk570wuy6sacdnrw8wdqjfh7j0q
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: NO ACTION
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: permissions
-        validate: true
-- changeSet:
-    id: 1686387384042-16
-    author: sonahp (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: category_id
-        baseTableName: courses
-        constraintName: fk5b8948fmw19uqd5fhf3aqfiqw
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: NO ACTION
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: categorys
-        validate: true
-- changeSet:
-    id: 1686387384042-17
-    author: sonahp (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: user_id
-        baseTableName: subscribes
-        constraintName: fk6hen8xwilkn7nbablqbqs6nkg
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: NO ACTION
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: users
-        validate: true
-- changeSet:
-    id: 1686387384042-18
-    author: sonahp (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: roles_id
-        baseTableName: users_roles
-        constraintName: fka62j07k5mhgifpp955h37ponj
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: NO ACTION
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: roles
-        validate: true
-- changeSet:
-    id: 1686387384042-19
-    author: sonahp (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: course_id
-        baseTableName: subscribes
-        constraintName: fkopf2lg9ruwvsdfx9c7sw7npkn
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: NO ACTION
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: courses
-        validate: true
-- changeSet:
-    id: 1686387384042-20
-    author: sonahp (generated)
-    changes:
-    - addForeignKeyConstraint:
-        baseColumnNames: role_id
-        baseTableName: roles_permissions
-        constraintName: fkqi9odri6c1o81vjox54eedwyh
-        deferrable: false
-        initiallyDeferred: false
-        onDelete: NO ACTION
-        onUpdate: NO ACTION
-        referencedColumnNames: id
-        referencedTableName: roles
-        validate: true
-- changeSet:
-    id: 1686387384042-21
+    id: 1686674669633-21
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:

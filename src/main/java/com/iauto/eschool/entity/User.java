@@ -59,5 +59,6 @@ public class User extends AuditEntity{
 	private String firstName;
 	private String lastName;
 	
-	
+	@Column(name = "verification_code", length = 64)
+    private String verificationCode;
 }
