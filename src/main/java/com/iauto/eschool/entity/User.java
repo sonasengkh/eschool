@@ -32,7 +32,11 @@ public class User extends AuditEntity{
 	private String username;
 	
 	private String password;
+	
+	@Column(unique = true)
 	private String email;
+	
+	@Column(unique = true)
 	private String phonenumber;
 	
 	//private LocalDateTime dateofbirth;
@@ -45,8 +49,8 @@ public class User extends AuditEntity{
 	//@Enumerated(EnumType.STRING)
 	//private UserStatus status;
 	
-	@Enumerated(EnumType.STRING)
-	private UserType type;
+	//@Enumerated(EnumType.STRING)
+	//private UserType type;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Role> roles;

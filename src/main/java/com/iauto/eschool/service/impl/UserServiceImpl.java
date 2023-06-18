@@ -17,10 +17,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.iauto.eschool.config.security.AuthUser;
+import com.iauto.eschool.dto.UserDTO;
 import com.iauto.eschool.entity.Role;
 import com.iauto.eschool.entity.User;
 import com.iauto.eschool.exception.ResourceNotFoundException;
+import com.iauto.eschool.mapper.UserMappers;
 import com.iauto.eschool.repository.UserRepository;
+import com.iauto.eschool.service.RoleService;
 import com.iauto.eschool.service.UserService;
 
 import net.bytebuddy.utility.RandomString;
@@ -36,6 +39,9 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
     private JavaMailSender mailSender;
+	
+	@Autowired
+	private RoleService roleService;
 	
 	@Override
 	public User getById(Long id) {
@@ -85,23 +91,23 @@ public class UserServiceImpl implements UserService{
 		return role.getPermissions().stream()
 			.map(permission -> new SimpleGrantedAuthority(permission.getName()));
 	}
-
+	
+	/*
 	@Override
 	public User register(User user) {
 		//Testing only
 		user.setPassword( passwordEncoder.encode(user.getPassword()) );
 		
 		user.setEnabled(false);
-		
 		return userRepository.save(user);
-		
 	}
-
+	*/
+	
 	private void sendVerificationEmail(User user, String siteURL)
 	        throws MessagingException, UnsupportedEncodingException {
 	    
 		String toAddress = user.getEmail();
-	    String fromAddress = "sonaseng.kh@gmail.com";
+	    String fromAddress = "sonasengyi@gmail.com";
 	    String senderName = "eSchool";
 	    String subject = "Please verify your registration";
 	    String content = "Dear [[name]],<br>"
@@ -138,13 +144,16 @@ public class UserServiceImpl implements UserService{
 	    String randomCode = RandomString.make(64);
 	    user.setVerificationCode(randomCode);
 	    user.setEnabled(false);
+	    
+	    user.setAccountNonExpired(true);
+	    user.setAccountNonLocked(true);
+	    user.setCredentialsNonExpired(true);
 	     
 	    userRepository.save(user);
 	     
 	    sendVerificationEmail(user, siteURL);
-		
 	}
-
+	
 	@Override
 	public boolean verify(String verificationCode) {
 		User user = userRepository.findByVerificationCode(verificationCode);
@@ -160,7 +169,22 @@ public class UserServiceImpl implements UserService{
 	    }
 	}
 
-
+	@Override
+	public UserDTO toUserDtoPlus(User user) {
+		UserDTO userDto = UserMappers.INSTANCE.toUserDto(user);
+		Set<Long> roleIdSet = user.getRoles().stream().map(role -> role.getId()).collect(Collectors.toSet());
+		userDto.setRoleId(roleIdSet);
+		userDto.setPassword("");
+		return userDto;
+	}
+	
+	@Override
+	public User toUser(UserDTO userDto) {
+		User user = UserMappers.INSTANCE.toUser(userDto);
+		Set<Role> RoleSet = userDto.getRoleId().stream().map(rId-> roleService.getById(rId)).collect(Collectors.toSet());
+		user.setRoles(RoleSet);
+		return user;
+	}
 	
 	
 

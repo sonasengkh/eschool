@@ -3,6 +3,7 @@ package com.iauto.eschool.config.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -41,6 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and()
 			.authorizeHttpRequests()
 			.antMatchers("/index.html").permitAll()
+			.antMatchers(HttpMethod.GET,"/courses").permitAll()
+			.antMatchers(HttpMethod.GET,"/users/verify*").permitAll()
+			.antMatchers(HttpMethod.POST,"/users").permitAll()
 			//.antMatchers("*").hasRole("ADMIN")
 			//.antMatchers("/courses*","/courses/*").hasAnyRole("ADMIN","AUTHOR")
 			.anyRequest()

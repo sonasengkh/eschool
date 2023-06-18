@@ -1,5 +1,8 @@
 package com.iauto.eschool.service.impl;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +13,7 @@ import com.iauto.eschool.service.RoleService;
 
 @Service
 public class RoleServiceImpl implements RoleService{
-
+ 
 	@Autowired
 	private RoleRepository roleRepository;
 	
@@ -27,4 +30,13 @@ public class RoleServiceImpl implements RoleService{
 				.orElseThrow(()-> new ResourceNotFoundException("role", id));
 	}
 
+
+
+	/*
+	@Override
+	public Set<Long> getIdsRole(Set<Role> roles) {
+		
+		return roles.stream().map(r -> r.getId()).collect(Collectors.toSet());
+	}
+	*/
 }

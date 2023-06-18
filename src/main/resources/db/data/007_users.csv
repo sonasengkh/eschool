@@ -1,3 +1,3 @@
-account_non_expired,account_non_locked,credentials_non_expired,email,enabled,first_name,gender,last_name,password,phonenumber,type,username
-TRUE,TRUE,TRUE,dara@ababank.com,TRUE,khove,MALE,chandara,$2a$10$10O8tm8ZF512PQ5t1k2iu.gqmrFLOPwHavZYOxWblLxt05X87f5LC,85515988862,ADMIN,dara
-TRUE,TRUE,TRUE,dollar@ababank.com,TRUE,Soy,MALE,hunidollar,$2a$10$xiyE86nAmY77nvhouYvBzOS/4wWFd1etHyuvBDiCijwzm8VtzIj9C,85515988862,AUTHOR,dollar
+account_non_expired,account_non_locked,credentials_non_expired,email,enabled,first_name,gender,last_name,password,phonenumber,username
+TRUE,TRUE,TRUE,dara@ababank1.com,TRUE,khove,MALE,chandara,$2a$10$10O8tm8ZF512PQ5t1k2iu.gqmrFLOPwHavZYOxWblLxt05X87f5LC,85599988862,dara
+TRUE,TRUE,TRUE,dollar@ababank1.com,TRUE,Soy,MALE,hunidollar,$2a$10$xiyE86nAmY77nvhouYvBzOS/4wWFd1etHyuvBDiCijwzm8VtzIj9C,85515988862,dollar
