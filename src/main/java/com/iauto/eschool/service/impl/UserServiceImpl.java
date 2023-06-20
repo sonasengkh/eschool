@@ -1,6 +1,7 @@
 package com.iauto.eschool.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,6 +11,8 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,6 +28,9 @@ import com.iauto.eschool.mapper.UserMappers;
 import com.iauto.eschool.repository.UserRepository;
 import com.iauto.eschool.service.RoleService;
 import com.iauto.eschool.service.UserService;
+import com.iauto.eschool.service.util.PageUtil;
+import com.iauto.eschool.spec.UserFilter;
+import com.iauto.eschool.spec.UserSpec;
 
 import net.bytebuddy.utility.RandomString;
 
@@ -185,6 +191,66 @@ public class UserServiceImpl implements UserService{
 		user.setRoles(RoleSet);
 		return user;
 	}
+
+	@Override
+	public User updateUser(User user, Long userId) {
+		User userById = getById(userId);
+		
+		
+		userById.setUsername(user.getUsername());
+		userById.setPassword(user.getPassword());
+		userById.setEmail(user.getEmail());
+		userById.setPhonenumber(user.getPhonenumber());
+		userById.setDateofbirth(user.getDateofbirth());
+		userById.setGender(user.getGender());
+		userById.setPhoto(user.getPhoto());
+		
+		userById.setRoles(user.getRoles());
+
+		userById.setAccountNonExpired(user.isAccountNonExpired());
+		userById.setAccountNonLocked(user.isAccountNonLocked());
+		userById.setCredentialsNonExpired(user.isCredentialsNonExpired());
+		userById.setEnabled(user.isEnabled());
+		userById.setFirstName(user.getFirstName());
+		userById.setLastName(user.getLastName());
+		
+		
+		userRepository.save(userById);
+		
+		return userById;
+	}
+
+	@Override
+	public Page<User> getUser(Map<String, String> params) {
+		UserFilter userFilter = new UserFilter();
+		
+		if (params.containsKey("id")) {
+			userFilter.setId( Long.parseLong(params.get("id")) );
+		}
+		if (params.containsKey("username")) {
+			userFilter.setUsername( params.get("username") );
+		}
+		
+		
+		int pageNumber = PageUtil.DEFAULT_PAGE_NUMBER;
+		if (params.containsKey(PageUtil.PAGE_NUMBER)) {
+			pageNumber = Integer.parseInt( params.get(PageUtil.PAGE_NUMBER) );
+		}
+		
+		int pageSize = PageUtil.DEFAULT_PAGE_LIMIT;
+		if (params.containsKey(PageUtil.PAGE_LIMIT)) {
+			pageSize = Integer.parseInt( params.get(PageUtil.PAGE_LIMIT) );
+		}
+		
+		UserSpec userSpec = new UserSpec(userFilter);
+		
+		Pageable pageable = PageUtil.getPageable(pageNumber, pageSize);
+		
+		Page<User> userPage = userRepository.findAll(userSpec, pageable);
+		
+		return userPage;
+	}
+	
 	
 	
 
