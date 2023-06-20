@@ -1,5 +1,7 @@
 package com.iauto.eschool.control;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +21,14 @@ public class RoleController {
 	@Autowired
 	private RoleService roleService;
 	
+	@RolesAllowed(value = "ROLE_ADMIN")
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Role role){
 		
 		return ResponseEntity.ok( roleService.create(role));
 	}
 	
+	@RolesAllowed(value = "ROLE_ADMIN")
 	@GetMapping("{id}")
 	public ResponseEntity<?> getById(@PathVariable("id") Long id){
 		

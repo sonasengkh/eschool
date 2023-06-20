@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,18 +42,21 @@ public class VideoController {
 //		return ResponseEntity.ok( videoService.create(video) );
 //	}
 
+	@PreAuthorize("hasAuthority('video:write')")
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody VideoDto videoDto) {
 		Video video = videoMapper.toVideo(videoDto);
 		return ResponseEntity.ok(videoService.create(video));
 	}
 
+	@PreAuthorize("hasAuthority('video:read')")
 	@GetMapping("{id}")
 	public ResponseEntity<?> getById(@PathVariable Long id) {
 		VideoDto videoDto = videoMapper.toVideoDto(videoService.getByid(id));
 		return ResponseEntity.ok(videoDto);
 	}
 	
+	@PreAuthorize("hasAuthority('video:update')")
 	@PutMapping("{id}")
 	public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody VideoDto videoDto){
 		Video video = videoMapper.toVideo(videoDto);
@@ -61,12 +65,14 @@ public class VideoController {
 		return ResponseEntity.ok(videoDtoResp);
 	}
 	
+	@PreAuthorize("hasAuthority('video:delete')")
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Long id){
 		videoService.delete(id);
 		return ResponseEntity.ok(null);
 	}
 	
+	@PreAuthorize("hasAuthority('video:read')")
 	@GetMapping()
 	public ResponseEntity<?> getVideos(@RequestParam Map<String, String> params ){
 		Page<Video> videosPage = videoService.getVideos(params);

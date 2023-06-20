@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,12 +34,13 @@ public class CourseController {
 	@Autowired
 	private CourseMapper courseMapper;
 
+	@PreAuthorize("hasAuthority('course:write')")
 	@PostMapping()
 	public ResponseEntity<?> create(@RequestBody CourseDto courseDto) {
 //		Category category = new Category();
 //		category.setId(1l);
 //		course.setCategory(category);
-		
+ 		
 		Course course = courseMapper.toCourse(courseDto);
 		//Course course = CourseMapper.INSTANCE.toCourse(courseDto);
 		
@@ -48,6 +50,7 @@ public class CourseController {
 		return ResponseEntity.ok( courseDtoResp );
 	}
 	
+	
 	@GetMapping("{id}")
 	public ResponseEntity<?> getById(@PathVariable("id") Long id){
 		Course course = courseService.getById(id);
@@ -56,6 +59,7 @@ public class CourseController {
 		return ResponseEntity.ok(courseDto);
 	}
 	
+	@PreAuthorize("hasAuthority('course:update')")
 	@PutMapping("{id}")
 	public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody CourseDto courseDto){
 		Course course = courseMapper.toCourse(courseDto);
@@ -64,11 +68,13 @@ public class CourseController {
 		return ResponseEntity.ok(courseDtoResp);
 	}
 	
+	@PreAuthorize("hasAuthority('course:delete')")
 	@DeleteMapping("{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Long id){
 		courseService.delete(id);
 		return ResponseEntity.ok(null);
 	}
+	
 	
 	@GetMapping
 	public ResponseEntity<?> getCourse(@RequestParam Map<String, String> params){

@@ -1,5 +1,7 @@
 package com.iauto.eschool.control;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +19,7 @@ public class PermissionController {
 	@Autowired
 	private PermissionService permissionService;
 	
-	
+	@RolesAllowed(value = "ROLE_ADMIN")
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Permission permission) {
 		Permission permission2 = permissionService.create(permission);

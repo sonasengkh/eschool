@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,7 @@ public class SubscribeController {
 //		return ResponseEntity.ok( subscribeService.requestSubscribe(subscribe) );
 //	}
 	
+	@PreAuthorize("hasAuthority('subscribe:write')")
 	@PostMapping
 	public ResponseEntity<?> requestSubscribe(@RequestBody SubscribeDto SubscribeDto){
 		Subscribe subscribe = subscribeMapper.toSubscribe(SubscribeDto);
@@ -45,12 +47,14 @@ public class SubscribeController {
 		return ResponseEntity.ok( subscribeDtoResp);
 	}
 	
+	@PreAuthorize("hasAuthority('subscribe:read')")
 	@GetMapping("{id}")
 	public ResponseEntity<?> getSubscribe(@PathVariable("id") Long id){
 		
 		return ResponseEntity.ok( subscribeMapper.tosubcribeDto( subscribeService.getSubscribe(id) ) );
 	}
 	
+	@PreAuthorize("hasAuthority('subscribe:update')")
 	@PutMapping("{id}")
 	public ResponseEntity<?> updateSubscribeStatus(@PathVariable("id") Long id, @RequestBody SubscribeDto subscribeDto){
 		Subscribe subscribe = subscribeService.updateSubscribeStatus(id, subscribeDto.getStatus());
@@ -58,6 +62,7 @@ public class SubscribeController {
 		return ResponseEntity.ok(subcribeDtoResp);
 	}
 	
+	@PreAuthorize("hasAuthority('subscribe:read')")
 	@GetMapping
 	public ResponseEntity<?> getSubscribes(@RequestParam Map<String, String> params){
 		
