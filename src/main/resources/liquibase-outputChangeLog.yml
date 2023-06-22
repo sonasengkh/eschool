@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 1687020877651-1
+    id: 1687448256320-1
     author: sonahp (generated)
     changes:
     - createSequence:
@@ -13,7 +13,7 @@ databaseChangeLog:
         sequenceName: hibernate_sequence
         startValue: 1
 - changeSet:
-    id: 1687020877651-2
+    id: 1687448256320-2
     author: sonahp (generated)
     changes:
     - createTable:
@@ -45,7 +45,7 @@ databaseChangeLog:
             type: VARCHAR(255)
         tableName: categorys
 - changeSet:
-    id: 1687020877651-3
+    id: 1687448256320-3
     author: sonahp (generated)
     changes:
     - createTable:
@@ -78,9 +78,12 @@ databaseChangeLog:
         - column:
             name: category_id
             type: BIGINT
+        - column:
+            name: user_id
+            type: BIGINT
         tableName: courses
 - changeSet:
-    id: 1687020877651-4
+    id: 1687448256320-4
     author: sonahp (generated)
     changes:
     - createTable:
@@ -110,7 +113,7 @@ databaseChangeLog:
             type: VARCHAR(255)
         tableName: permissions
 - changeSet:
-    id: 1687020877651-5
+    id: 1687448256320-5
     author: sonahp (generated)
     changes:
     - createTable:
@@ -140,7 +143,7 @@ databaseChangeLog:
             type: VARCHAR(255)
         tableName: roles
 - changeSet:
-    id: 1687020877651-6
+    id: 1687448256320-6
     author: sonahp (generated)
     changes:
     - createTable:
@@ -161,7 +164,7 @@ databaseChangeLog:
             type: BIGINT
         tableName: roles_permissions
 - changeSet:
-    id: 1687020877651-7
+    id: 1687448256320-7
     author: sonahp (generated)
     changes:
     - createTable:
@@ -197,7 +200,7 @@ databaseChangeLog:
             type: BIGINT
         tableName: subscribes
 - changeSet:
-    id: 1687020877651-8
+    id: 1687448256320-8
     author: sonahp (generated)
     changes:
     - createTable:
@@ -274,7 +277,7 @@ databaseChangeLog:
             type: VARCHAR(64)
         tableName: users
 - changeSet:
-    id: 1687020877651-9
+    id: 1687448256320-9
     author: sonahp (generated)
     changes:
     - createTable:
@@ -295,7 +298,7 @@ databaseChangeLog:
             type: BIGINT
         tableName: users_roles
 - changeSet:
-    id: 1687020877651-10
+    id: 1687448256320-10
     author: sonahp (generated)
     changes:
     - createTable:
@@ -337,7 +340,7 @@ databaseChangeLog:
             type: BIGINT
         tableName: videos
 - changeSet:
-    id: 1687020877651-11
+    id: 1687448256320-11
     author: sonahp (generated)
     changes:
     - addUniqueConstraint:
@@ -345,7 +348,7 @@ databaseChangeLog:
         constraintName: uk_6dotkott2kjsp8vw4d0m25fb7
         tableName: users
 - changeSet:
-    id: 1687020877651-12
+    id: 1687448256320-12
     author: sonahp (generated)
     changes:
     - addUniqueConstraint:
@@ -353,7 +356,7 @@ databaseChangeLog:
         constraintName: uk_70jmct5ej765l57mlcrdhxn1c
         tableName: users
 - changeSet:
-    id: 1687020877651-13
+    id: 1687448256320-13
     author: sonahp (generated)
     changes:
     - addUniqueConstraint:
@@ -361,7 +364,7 @@ databaseChangeLog:
         constraintName: uk_fvlboe1rkmljqrviw6rm5sr3m
         tableName: categorys
 - changeSet:
-    id: 1687020877651-14
+    id: 1687448256320-14
     author: sonahp (generated)
     changes:
     - addUniqueConstraint:
@@ -369,7 +372,7 @@ databaseChangeLog:
         constraintName: uk_r43af9ap4edm43mmtq01oddj6
         tableName: users
 - changeSet:
-    id: 1687020877651-15
+    id: 1687448256320-15
     author: sonahp (generated)
     changes:
     - addUniqueConstraint:
@@ -377,7 +380,7 @@ databaseChangeLog:
         constraintName: ukcqr48ynu2tv1qxypqvtfcthm
         tableName: subscribes
 - changeSet:
-    id: 1687020877651-16
+    id: 1687448256320-16
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -392,7 +395,22 @@ databaseChangeLog:
         referencedTableName: users
         validate: true
 - changeSet:
-    id: 1687020877651-17
+    id: 1687448256320-17
+    author: sonahp (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: courses
+        constraintName: fk51k53m6m5gi9n91fnlxkxgpmv
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: users
+        validate: true
+- changeSet:
+    id: 1687448256320-18
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -407,7 +425,7 @@ databaseChangeLog:
         referencedTableName: permissions
         validate: true
 - changeSet:
-    id: 1687020877651-18
+    id: 1687448256320-19
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -422,7 +440,7 @@ databaseChangeLog:
         referencedTableName: categorys
         validate: true
 - changeSet:
-    id: 1687020877651-19
+    id: 1687448256320-20
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -437,7 +455,7 @@ databaseChangeLog:
         referencedTableName: users
         validate: true
 - changeSet:
-    id: 1687020877651-20
+    id: 1687448256320-21
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -452,7 +470,7 @@ databaseChangeLog:
         referencedTableName: roles
         validate: true
 - changeSet:
-    id: 1687020877651-21
+    id: 1687448256320-22
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -467,7 +485,7 @@ databaseChangeLog:
         referencedTableName: courses
         validate: true
 - changeSet:
-    id: 1687020877651-22
+    id: 1687448256320-23
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:
@@ -482,7 +500,7 @@ databaseChangeLog:
         referencedTableName: roles
         validate: true
 - changeSet:
-    id: 1687020877651-23
+    id: 1687448256320-24
     author: sonahp (generated)
     changes:
     - addForeignKeyConstraint:

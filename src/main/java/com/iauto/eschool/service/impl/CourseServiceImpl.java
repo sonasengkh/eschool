@@ -5,14 +5,18 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.iauto.eschool.entity.Category;
 import com.iauto.eschool.entity.Course;
+import com.iauto.eschool.entity.User;
 import com.iauto.eschool.exception.ResourceNotFoundException;
 import com.iauto.eschool.repository.CourseRepository;
 import com.iauto.eschool.service.CategoryService;
 import com.iauto.eschool.service.CourseService;
+import com.iauto.eschool.service.UserService;
 import com.iauto.eschool.service.util.PageUtil;
 import com.iauto.eschool.spec.CourseFilter;
 import com.iauto.eschool.spec.CourseSpec;
@@ -26,8 +30,18 @@ public class CourseServiceImpl implements CourseService {
 	@Autowired
 	private CategoryService categoryService;
 	
+	@Autowired
+	private UserService userService;
+	
 	@Override
 	public Course creat(Course course) {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		System.out.println("authentication.getName:"+username);
+		User user = userService.getByUsername(username);
+		System.out.println("user.username:"+user.getUsername());
+		course.setUser(user);
 		
 		categoryService.getById(course.getCategory().getId());
 		return courseRepository.save(course);
@@ -57,6 +71,7 @@ public class CourseServiceImpl implements CourseService {
 		CourseFilter courseFilter = new CourseFilter();
 		Category category = new Category();
 		
+		
 		if (params.containsKey("id")) {
 			Long id = Long.parseLong( params.get("id") );
 			courseFilter.setId(id);
@@ -77,6 +92,14 @@ public class CourseServiceImpl implements CourseService {
 		}
 		courseFilter.setCategory(category);
 		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		System.out.println("course get all:"+username);
+		if (username != "anonymousUser") {
+			System.out.println("track 2");
+			User user = userService.getByUsername(username);
+			courseFilter.setUser(user);
+		}
 		
 		//-----------
 		int pageNumber = PageUtil.DEFAULT_PAGE_NUMBER;
@@ -95,5 +118,7 @@ public class CourseServiceImpl implements CourseService {
 		Page<Course> coursePage = courseRepository.findAll(courseSpec, pageable);
 		return coursePage;
 	}
+	
+	
 
 }

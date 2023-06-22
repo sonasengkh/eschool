@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.data.domain.Page;
 
+import com.iauto.eschool.dto.CourseDto;
 import com.iauto.eschool.entity.Course;
 
 public interface CourseService {

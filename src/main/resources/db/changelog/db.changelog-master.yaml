@@ -3,10 +3,6 @@ databaseChangeLog:
     #- file: db/changelog/001_init_db_structure.yml
     - file: liquibase-outputChangeLog.yml
   - include:
-    - file: db/changelog/002_insert_categorys.yml
-  - include:
-    - file: db/changelog/003_insert_courses.yml
-  - include:
     - file: db/changelog/004_insert_permissions.yml
   - include:
     - file: db/changelog/005_insert_roles.yml    
@@ -16,3 +12,8 @@ databaseChangeLog:
     - file: db/changelog/007_insert_users.yml 
   - include:
     - file: db/changelog/008_insert_users_roles.yml    
+  - include:
+    - file: db/changelog/002_insert_categorys.yml
+  - include:
+    - file: db/changelog/003_insert_courses.yml
+    

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,10 +60,12 @@ public class CourseController {
 		
 		return ResponseEntity.ok(courseDto);
 	}
-	
+	 
 	@PreAuthorize("hasAuthority('course:update')")
 	@PutMapping("{id}")
 	public ResponseEntity<?> update(@PathVariable("id") Long id, @RequestBody CourseDto courseDto){
+		
+		
 		Course course = courseMapper.toCourse(courseDto);
 		course.setId(id);
 		CourseDto courseDtoResp = courseMapper.toCourseDto( courseService.update(id, course) );
@@ -78,9 +82,13 @@ public class CourseController {
 	
 	@GetMapping
 	public ResponseEntity<?> getCourse(@RequestParam Map<String, String> params){
-		Page<Course> coursesPage = courseService.getCourses(params);
-		PageDTO pageDTO = new PageDTO(coursesPage);
 		
+
+		
+		Page<Course> coursesPage = courseService.getCourses(params);
+		
+		PageDTO pageDTO = new PageDTO(coursesPage);
+
 		return ResponseEntity.ok(pageDTO);
 	}
 }

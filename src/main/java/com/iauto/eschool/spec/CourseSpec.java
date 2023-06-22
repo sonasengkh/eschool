@@ -41,7 +41,13 @@ public class CourseSpec implements Specification<Course> {
 			Predicate cateName = criteriaBuilder.like( criteriaBuilder.upper( root.get("category").get("name") ) , "%" + courseFilter.getCategory().getName().toUpperCase() + "%");
 			predicates.add(cateName);
 		}
+ 
 		
+		if( courseFilter.getUser() != null) {
+			System.out.println("track 1");
+			Predicate userId = root.get("user").get("id").in(courseFilter.getUser().getId());
+			predicates.add(userId);
+		}
 		
 		return criteriaBuilder.and(predicates.toArray(Predicate[]::new));
 	}

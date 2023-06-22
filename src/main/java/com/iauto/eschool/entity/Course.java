@@ -26,4 +26,9 @@ public class Course extends AuditEntity{
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
 	private Category category;
+	
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private User user;
+	
 }
