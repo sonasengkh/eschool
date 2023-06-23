@@ -1,14 +1,18 @@
 package com.iauto.eschool.service.impl;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.iauto.eschool.dto.CourseDto;
+import com.iauto.eschool.dto.PageDTO;
 import com.iauto.eschool.entity.Category;
 import com.iauto.eschool.entity.Course;
 import com.iauto.eschool.entity.User;
@@ -36,12 +40,7 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public Course creat(Course course) {
 		
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
-		System.out.println("authentication.getName:"+username);
-		User user = userService.getByUsername(username);
-		System.out.println("user.username:"+user.getUsername());
-		course.setUser(user);
+		
 		
 		categoryService.getById(course.getCategory().getId());
 		return courseRepository.save(course);
@@ -119,6 +118,76 @@ public class CourseServiceImpl implements CourseService {
 		return coursePage;
 	}
 	
-	
+	//DTO
+	@Override
+	public Page<CourseDto> getCoursesDto(Map<String, String> params) {
+		CourseFilter courseFilter = new CourseFilter();
+		Category category = new Category();
+		
+		
+		if (params.containsKey("id")) {
+			Long id = Long.parseLong( params.get("id") );
+			courseFilter.setId(id);
+		}
+		
+		if (params.containsKey("name")) {
+			String name = params.get("name");
+			courseFilter.setName(name);
+		}
+		
+		if (params.containsKey("cateid")) {
+			Long cateId = Long.parseLong( params.get("cateid") );
+			category.setId(cateId);
+		}
+		if(params.containsKey("catename")) {
+			String CateName = params.get("catename");
+			category.setName(CateName);
+		}
+		courseFilter.setCategory(category);
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		System.out.println("course get all:"+username);
+		if (username != "anonymousUser") {
+			System.out.println("track 2");
+			User user = userService.getByUsername(username);
+			courseFilter.setUser(user);
+		}
+		
+		//-----------
+		int pageNumber = PageUtil.DEFAULT_PAGE_NUMBER;
+		if (params.containsKey(PageUtil.PAGE_NUMBER)) {
+			pageNumber = Integer.parseInt( params.get(PageUtil.PAGE_NUMBER) );
+		}
+		
+		int pageSize = PageUtil.DEFAULT_PAGE_LIMIT;
+		if (params.containsKey(PageUtil.PAGE_LIMIT)) {
+			pageSize = Integer.parseInt( params.get(PageUtil.PAGE_LIMIT) );
+		}
+		
+		CourseSpec courseSpec = new CourseSpec(courseFilter);
+		Pageable pageable = PageUtil.getPageable(pageNumber, pageSize);
+		
+		Page<Course> coursePage = courseRepository.findAll(courseSpec, pageable);
+		
+		//---------course DTO page--------------
+
+		int totalElements = (int) coursePage.getTotalElements();
+		PageImpl<CourseDto> pageImpl = new PageImpl<CourseDto>(coursePage.getContent()
+			.stream()
+			.map(course -> new CourseDto(course.getName(), 
+										course.getCategory().getId(),
+										course.getCategory().getName(),
+										course.getUser().getId()
+										
+										)
+				)
+			.collect(Collectors.toList()),pageable,totalElements);
+		
+		//-----------------------
+		
+		
+		return pageImpl;
+	}
 
 }

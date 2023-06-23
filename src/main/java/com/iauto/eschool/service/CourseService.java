@@ -15,4 +15,5 @@ public interface CourseService {
 	void delete(Long id);
 	
 	Page<Course> getCourses(Map<String, String> params);
+	Page<CourseDto> getCoursesDto(Map<String, String> params);
 }

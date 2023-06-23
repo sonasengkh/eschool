@@ -1,9 +1,12 @@
 package com.iauto.eschool.control;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -22,8 +25,10 @@ import com.iauto.eschool.dto.CourseDto;
 import com.iauto.eschool.dto.PageDTO;
 import com.iauto.eschool.entity.Category;
 import com.iauto.eschool.entity.Course;
+import com.iauto.eschool.entity.User;
 import com.iauto.eschool.mapper.CourseMapper;
 import com.iauto.eschool.service.CourseService;
+import com.iauto.eschool.service.UserService;
 
 import lombok.AllArgsConstructor;
 
@@ -33,8 +38,12 @@ import lombok.AllArgsConstructor;
 public class CourseController {
 	@Autowired
 	private CourseService courseService;
+	
 	@Autowired
 	private CourseMapper courseMapper;
+	
+	@Autowired
+	private UserService userService;
 
 	@PreAuthorize("hasAuthority('course:write')")
 	@PostMapping()
@@ -43,6 +52,14 @@ public class CourseController {
 //		category.setId(1l);
 //		course.setCategory(category);
  		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		System.out.println("authentication.getName:"+username);
+		User user = userService.getByUsername(username);
+		System.out.println("user.username:"+user.getUsername());
+		courseDto.setUserId(user.getId());
+		
+		
 		Course course = courseMapper.toCourse(courseDto);
 		//Course course = CourseMapper.INSTANCE.toCourse(courseDto);
 		
@@ -83,12 +100,12 @@ public class CourseController {
 	@GetMapping
 	public ResponseEntity<?> getCourse(@RequestParam Map<String, String> params){
 		
-
+//		Page<Course> coursesPage = courseService.getCourses(params);
+//		PageDTO pageDTO = new PageDTO(coursesPage);
+//		return ResponseEntity.ok(pageDTO);
 		
-		Page<Course> coursesPage = courseService.getCourses(params);
-		
-		PageDTO pageDTO = new PageDTO(coursesPage);
-
+		Page<CourseDto> coursesPageDto = courseService.getCoursesDto(params);
+		PageDTO pageDTO = new PageDTO(coursesPageDto);
 		return ResponseEntity.ok(pageDTO);
 	}
 }
